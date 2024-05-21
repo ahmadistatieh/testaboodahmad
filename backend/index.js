@@ -54,7 +54,7 @@ export const ForgotPassword = async (req, res) => {
         return res.status(200).json({ message: 'Success', codeToSend });
     } catch (err) {
         console.error('Error processing forgot password:', err); 
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({ message: 'Internal Server Error' , data:err});
     }
 };
 
