@@ -6,26 +6,26 @@ const FindAccount = () => {
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
 
-    /* CHAT GPT */
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('http://localhost:4000/ForgotPassword', {
+            const find = await fetch('http://localhost:4000/ForgotPassword', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ email }),
             });
-            const result = await response.json({});
-            if (response.ok) {
-                console.log('Email sent with code:', result.codeToSend);
+            const result = await find.json({});
+
+            if (find.ok) {
                 navigate('/email-verification'); 
             } else {
                 console.error('Error:', result.message);
             }
+
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error', error);
         }
     };
 

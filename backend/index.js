@@ -34,7 +34,7 @@ export const ForgotPassword = async (req, res) => {
     console.log('Received email:', email); 
 
     try {
-        const RandomCode = customAlphabet('ABCDMNY123456789', 4);
+        const RandomCode = customAlphabet('1234567890', 6);
         const codeToSend = RandomCode();
         console.log('Generated code:', codeToSend);
 
@@ -59,6 +59,27 @@ export const ForgotPassword = async (req, res) => {
 };
 
 app.post('/ForgotPassword', ForgotPassword); 
+
+app.post('/verifyCode', async (req, res) => {
+
+    const { code } = req.body; 
+    console.log('Received code:', code);
+
+    try {
+        const user = await usersModel.findOne({ sendCode: code });
+
+        if (!user) {
+            console.error('Invalid code');
+            return res.status(400).json({ message: 'Invalid code' });
+        }
+
+        console.log('Code verified for user:', user.email);
+        return res.status(200).json({ message: 'Code verified' });
+    } catch (err) {
+        console.error('Error verifying code:', err);
+        res.status(500).json({ message: 'Internal Server Error', data: err });
+    }
+});
 
 const PORT = process.env.PORT || 4000
 

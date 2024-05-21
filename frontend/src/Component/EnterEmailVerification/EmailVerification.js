@@ -6,7 +6,6 @@ const EmailVerification = () => {
     const [code, setCode] = useState('');
     const navigate = useNavigate();
 
-    /* CHAT GPT */
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -15,12 +14,12 @@ const EmailVerification = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ code }),
             });
             const result = await response.json();
+
             if (response.ok) {
                 console.log('Code verified:', result);
-                navigate('/change-password');  // Navigate to change password page
+                navigate('/changePassword');
             } else {
                 console.error('Error:', result.message);
             }
@@ -30,7 +29,7 @@ const EmailVerification = () => {
     };
 
     const handleCancel = () => {
-        navigate('/ForgetPassword');
+        navigate('/ForgotPassword');
         console.log('Cancel button clicked');
     };
 
@@ -50,8 +49,8 @@ const EmailVerification = () => {
                         placeholder="The Code"
                         required
                         value={code}
-                        pattern="\d{4}"
-                        maxLength="4"
+                        pattern="\d{6}"
+                        maxLength="6"
                         onChange={(e) => setCode(e.target.value)}
                     />
                     
