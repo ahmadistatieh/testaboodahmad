@@ -10,7 +10,7 @@ const FindAccount = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('http://localhost:4000/forgotPassword', {
+            const response = await fetch('http://localhost:4000/ForgotPassword', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ const FindAccount = () => {
             const result = await response.json({});
             if (response.ok) {
                 console.log('Email sent with code:', result.codeToSend);
-                navigate('/email-verification');  // Navigate to email verification page
+                navigate('/email-verification'); 
             } else {
                 console.error('Error:', result.message);
             }
@@ -55,7 +55,7 @@ const FindAccount = () => {
                     <button className='ButtonSearchForgetPassword' type="submit">Search</button>
                     <button className='ButtonCancelForgetPassword' type="button" onClick={handleCancel}>Cancel</button>
                 </form>
-                <Link to='/ForgetPassword' />
+                <Link to='/ForgotPassword' />
             </div>
         </div>
     );

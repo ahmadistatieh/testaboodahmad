@@ -58,7 +58,7 @@ const EmailVerification = () => {
                     <button className='button-verify' type="submit">Verify</button>
                     <button className='button-cancel' type="button" onClick={handleCancel}>Cancel</button>
                 </form>
-                <Link to='/ForgetPassword' />
+                <Link to='/ForgotPassword' />
             </div>
         </div>
     );
